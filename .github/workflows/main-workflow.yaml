@@ -3,6 +3,7 @@ on: push
 jobs:
   change_semantic_number:
     name: Produce Changes to sem version
+    runs-on: ubuntu-latest
     steps:
       - name: Use github action
         uses: paulhatch/semantic-version@v5.3.0
