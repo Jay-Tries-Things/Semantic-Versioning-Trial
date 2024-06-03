@@ -4,8 +4,6 @@ on:
     branches:
       - main
 
-env:
-  REPO: thedoorknobster/sample-app
 
 jobs:
   docker:
@@ -18,11 +16,14 @@ jobs:
           # Fetch all commits
           fetch-depth: 0
 
-      - name: Semantic versioning
-        id: versioning
-        uses: PaulHatch/semantic-version@v5.3.0
+      - name: Perform semantic version
+        uses: paulhatch/semantic-version@v5.0.3
+        id: semantic_version
         with:
-          branch: main
           tag_prefix: "v"
-          major_pattern: "BREAKING CHANGE:"
-          minor_pattern: "feat:"
+          major_pattern: "(MAJOR)"
+          minor_pattern: "(MINOR)"
+          version_format: "${major}.${minor}.${patch}-rc${increment}"
+          user_format_type: "csv"
+          bump_each_commit: false
+          search_commit_body: true
